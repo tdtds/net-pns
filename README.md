@@ -24,9 +24,19 @@ Or install it yourself as:
 
 require 'net/pns'
 
-pns = Net::PNS.new(192.168.0.10, 10000)
-pns.light({red: :on}) #=> Red ON
-pns.light({red: :on, green: :on}) #=> Red and Green ON
+Net::PNS.new(192.168.0.10, 10000) do |patlite|
+  patlite.light({red: :blink1, yellow: :on, green: :blink2})
+  puts patlite.stat.unpack('C*') #=> [2, 1, 3, 0, 0, 0]
+  sleep 10
+  patlite.clear
+  puts patlite.stat.unpack('C*') #=> [0, 0, 0, 0, 0, 0]
+end
+
+patlite = Net::PNS.new(192.168.0.10)
+patlite.light({buzzer: :buzz1}) #=> buzzer start
+sleep 3
+patlite.clear #=> buzzer stop
+patlite.close
 
 ## Contributing
 

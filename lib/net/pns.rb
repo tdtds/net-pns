@@ -9,6 +9,14 @@ module Net
 		def initialize(host, port = 10000, type = 'XX')
 			@socket = TCPSocket.new(host, port)
 			@type = type.unpack('CC')
+
+			if block_given?
+				begin
+					yield self
+				ensure
+					close
+				end
+			end
 		end
 
 		#
@@ -38,6 +46,7 @@ module Net
 
 		def close
 			@socket.close
+			@socket = nil
 		end
 
 	private
