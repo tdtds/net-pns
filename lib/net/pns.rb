@@ -1,7 +1,6 @@
 require "net/pns/version"
 
 module Net
-	module PNS
-		# Your code goes here...
+	class PNS
 	end
 end
