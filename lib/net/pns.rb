@@ -37,7 +37,7 @@ module Net
 		end
 
 		def stat
-			return send('G', [], 6)
+			return send('G', [], 6).unpack('C*')
 		end
 
 		PATTERN = {0 => 0, 1 => 1, stop: 0, play: 1}
