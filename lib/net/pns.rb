@@ -3,9 +3,9 @@ require 'socket'
 
 module Net
 	class PNS
-		class WriteError < StandardError
+		class LightError < StandardError; end
+		class PlayError < StandardError; end
 
-		end
 		def initialize(host, port = 10000, type = 'XX')
 			@socket = TCPSocket.new(host, port)
 			@type = type.unpack('CC')
@@ -33,11 +33,17 @@ module Net
 		def light(command)
 			cmd = KEYS.map{|c| [c, VALUES[command[c]] || 9]}.to_h.values
 			ret = send('S', cmd, 1).unpack('C')[0]
-			raise WriteError.new unless ret == 0x06
+			raise LightError.new unless ret == 0x06
 		end
 
 		def stat
 			return send('G', [], 6)
+		end
+
+		PATTERN = {0 => 0, 1 => 1, stop: 0, play: 1}
+		def play_sound(ch, pattern = :play, repeat = 0)
+			ret = send('V', [PATTERN[pattern] || 1, repeat, 0, ch], 1)
+			raise PlayError.new unless ret == 0x06
 		end
 
 		def clear
