@@ -22,6 +22,7 @@ Or install it yourself as:
 
 ## Usage
 
+```ruby
 require 'net/pns'
 
 Net::PNS.new(192.168.0.10, 10000) do |patlite|
@@ -35,8 +36,9 @@ end
 patlite = Net::PNS.new(192.168.0.10)
 patlite.light({buzzer: :buzz1}) #=> buzzer start
 sleep 3
-patlite.clear #=> buzzer stop
+patlite.clear #=> buzzer stop after 3sec
 patlite.close
+```
 
 ## Contributing
 
