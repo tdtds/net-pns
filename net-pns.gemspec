@@ -6,6 +6,8 @@ require 'net/pns/version'
 Gem::Specification.new do |spec|
   spec.name          = "net-pns"
   spec.version       = Net::PNS::VERSION
+  spec.platform      = Gem::Platform::RUBY
+  spec.required_ruby_version = '>= 2.0.0'
   spec.authors       = ["TADA Tadashi"]
   spec.email         = ["t@tdtds.jp"]
   spec.summary       = %q{protocol handler of PNS commands}
