@@ -32,8 +32,8 @@ module Net
 		}
 		def light(command)
 			cmd = KEYS.map{|c| [c, VALUES[command[c]] || 9]}.to_h.values
-			ret = send('S', cmd, 1).unpack('C')[0]
-			raise LightError.new unless ret == 0x06
+			ret = send('S', cmd, 1).ord
+			raise LightError.new("code 0x#{ret.to_s(16).rjust(2, '0')}") unless ret == 0x06
 		end
 
 		def stat
@@ -42,8 +42,8 @@ module Net
 
 		PATTERN = {0 => 0, 1 => 1, stop: 0, play: 1}
 		def play_sound(ch, pattern = :play, repeat = 0)
-			ret = send('V', [PATTERN[pattern] || 1, repeat, 0, ch], 1)
-			raise PlayError.new unless ret == 0x06
+			ret = send('V', [PATTERN[pattern] || 1, repeat, 0, ch], 1).ord
+			raise PlayError.new("code 0x#{ret.to_s(16).rjust(2, '0')}") unless ret == 0x06
 		end
 
 		def clear
