@@ -7,8 +7,8 @@ Gem::Specification.new do |spec|
   spec.name          = "net-pns"
   spec.version       = Net::PNS::VERSION
   spec.platform      = Gem::Platform::RUBY
-  spec.required_ruby_version = '>= 2.0.0'
-  spec.authors       = ["TADA Tadashi"]
+  spec.required_ruby_version = '>= 2.5.0'
+  spec.authors       = ["Tada, Tadashi"]
   spec.email         = ["t@tdtds.jp"]
   spec.summary       = %q{protocol handler of PNS commands}
   spec.description   = %q{protocol handler of PNS commands for PATLITE NH-FV series}
@@ -23,5 +23,4 @@ Gem::Specification.new do |spec|
   spec.add_development_dependency "bundler"
   spec.add_development_dependency "rake"
   spec.add_development_dependency "rspec"
-  spec.add_development_dependency "pry"
 end
